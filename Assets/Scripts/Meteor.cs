@@ -23,8 +23,9 @@ public class Meteor : MonoBehaviour {
 	//int maxDist = 100;
 	float minDist = 0.5f;
 
-	public int paramA = 0;
-	public int paramB = 0;
+	int paramA = 2;
+	int paramB = 0;
+	int paramResult = 0;
 
 	//String
 	public string operation = "defineix funcio";
@@ -35,6 +36,8 @@ public class Meteor : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
 		//stateT.text = state.ToString();
+		GetComponentInChildren<TextMesh>().text = paramA+" + "+paramB+" = ?";
+
 		
 	
 	}
@@ -68,6 +71,7 @@ public class Meteor : MonoBehaviour {
 			//Here Call any function U want Like Shoot at here or something
 			//Destroy(gameObject);
 			stateT.text = "Destroyed";
+			gameObject.SetActive(false);
 		} 
 	
 	}
