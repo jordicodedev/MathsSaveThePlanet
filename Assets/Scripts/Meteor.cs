@@ -19,9 +19,9 @@ public class Meteor : MonoBehaviour {
 	public int result = 0;
 	public float dist = MAXDIST;
 	public int state;
-	int moveSpeed = 2;
+	int moveSpeed = 1;
 	//int maxDist = 100;
-	float minDist = 0.5f;
+	float minDist = 1.1f;
 
 	[HideInInspector]
 	public int paramA;
