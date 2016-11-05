@@ -20,6 +20,10 @@ public class MeteorGenerator : MonoBehaviour {
     Planet planeta;
 
     public int lvl;
+
+	public AudioClip over;
+	public AudioClip explosio;
+	public AudioSource altaveu;
 	// Use this for initialization
 	void Start () {
 		CreateMeteors ();
@@ -149,14 +153,18 @@ public class MeteorGenerator : MonoBehaviour {
 
 	public void comprovacioResultat(int respostaJugador){
 		if (respostaJugador == selectedMeteor.result) {
+			altaveu.clip = explosio;
+			altaveu.Play ();
 			Destroy (selectedMeteor.gameObject);
-            countDown += 5;
+            countDown += 8;
 		}else{
 			selectedMeteor.moveSpeed += 0.3f; 
 		}
 	}
 
     public void gameOver(){
+		altaveu.clip = over;
+		altaveu.Play ();
         countDown = 0;
         timerT.text = "" + finnishingTime.ToString("F0") + " seconds";
         keyBoardObject.SetActive(false);

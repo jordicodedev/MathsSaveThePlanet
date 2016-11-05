@@ -9,6 +9,9 @@ public class KeyBoardManager : MonoBehaviour {
 	public bool submitValue;
 	MeteorGenerator mg;
 
+	public AudioClip boto1;
+	public AudioClip boto2;
+	public AudioSource altaveu;
 	// Use this for initialization
 	void Start () {
         ans = 0;
@@ -22,14 +25,19 @@ public class KeyBoardManager : MonoBehaviour {
 		
 	}
     public void add(int num) {
-        if (ans != 0) {
+		altaveu.clip = boto2;
+		altaveu.Play ();
+
+		if (ans != 0) {
             ans *= 10;
         }
         ans += num;
         answerText.text = "" + ans;
     }
     public void delete() {
-        if (ans != 0)
+		altaveu.clip = boto1;
+		altaveu.Play ();
+		if (ans != 0)
         {
             ans /= 10;
             answerText.text = "" + ans;
@@ -37,7 +45,8 @@ public class KeyBoardManager : MonoBehaviour {
     }
     public void sendAnswer()
     {
-		
+		altaveu.clip = boto1;
+		altaveu.Play ();
 		Debug.Log("Enterr");
 		mg.comprovacioResultat (ans);
 		ans = 0;
