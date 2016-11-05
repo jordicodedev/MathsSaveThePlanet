@@ -19,7 +19,7 @@ public class Meteor : MonoBehaviour {
 	public int result = 0;
 	public float dist = MAXDIST;
 	public int state;
-	int moveSpeed = 1;
+	float moveSpeed = 0.2f;
 	//int maxDist = 100;
 	float minDist = 1.1f;
 
@@ -33,6 +33,7 @@ public class Meteor : MonoBehaviour {
 	MeteorGenerator meGenerator;
 	Meteor self;
 	TextMesh textFunction;
+	KeyBoardManager kbmanager;
 
 	//String
 	public string operation = "defineix funcio";
@@ -41,7 +42,14 @@ public class Meteor : MonoBehaviour {
 
 
 	void OnMouseDown(){
-		Debug.Log ("Holaswqdqw");
+
+		Meteor[] meteorits = GameObject.FindObjectsOfType<Meteor>();
+		foreach(Meteor meteorit in meteorits){
+			meteorit.GetComponentInChildren<Renderer> ().material.color = Color.white;
+		}
+		gameObject.GetComponentInChildren<Renderer> ().material.color = Color.green;
+
+		Debug.Log ("Meteor selected");
 		meGenerator.selectionUpdate (self);
 
 	}
@@ -55,6 +63,7 @@ public class Meteor : MonoBehaviour {
 		planet = GameObject.Find ("PlanetGameObject").transform;
 		distT = GameObject.Find ("ActualDist").GetComponent<Text>();
 		stateT = GameObject.Find ("State").GetComponent<Text>();
+		//kbmanager = GameObject.Find ("InputKeyBoard");
 
 
 		meGenerator = GameObject.FindObjectOfType<MeteorGenerator>();
@@ -66,7 +75,7 @@ public class Meteor : MonoBehaviour {
 		//textFunction.text = GetComponentInChildren<TextMesh>().text = paramA+" + "+paramB+" = ?";
 
 		textFunction = GetComponentInChildren<TextMesh> ();
-		textFunction.text = paramA+" + "+paramB+" = ?";
+		textFunction.text = paramA+" + "+paramB+" = "+result;
 		//textFunction.text = GetComponentInChildren<TextMesh>().text = paramA+" + "+paramB+" = ?";
 
 
@@ -106,12 +115,14 @@ public class Meteor : MonoBehaviour {
 
 
 		}
+
 		if(Vector3.Distance(transform.position,planet.position) <= minDist)
 		{
 			//Here Call any function U want Like Shoot at here or something
 			//Destroy(gameObject);
 			stateT.text = "Destroyed";
 			Destroy (gameObject);
+
 		}
 
 

@@ -2,10 +2,10 @@
 using System.Collections;
 
 public class MeteorGenerator : MonoBehaviour {
-	float timerMeteor = 5.0f;
+	float timerMeteor = 1.0f;
     float countDown = 30.0f;
 	public GameObject meteor;
-	Meteor selectedMeteor;
+	public Meteor selectedMeteor;
 	int val1;
 	int val2;
 	int result;
@@ -118,4 +118,14 @@ public class MeteorGenerator : MonoBehaviour {
     public void selectionUpdate(Meteor m) {
         selectedMeteor = m;
     }
+
+	public void comprovacioResultat(int respostaJugador){
+		if (respostaJugador == selectedMeteor.result) {
+			Destroy (selectedMeteor.gameObject);
+			//Afegir temps
+		}else{
+			//incrementar velocitat
+		}
+	}
+		
 }
