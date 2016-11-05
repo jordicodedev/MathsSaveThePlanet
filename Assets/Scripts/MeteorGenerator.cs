@@ -11,13 +11,13 @@ public class MeteorGenerator : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-
+		CreateMeteors ();
 	}
 
 	// Update is called once per frame
 	void Update () {
 		timerMeteor -= Time.deltaTime;
-		CreateMeteors();
+
 		if (timerMeteor < 0)
 		{
 			CreateMeteors();
@@ -30,6 +30,7 @@ public class MeteorGenerator : MonoBehaviour {
 		m = Instantiate(meteor);
 		m.transform.position = new Vector3(0,0,0);
 		getOperation(1);
+		m.SetActive (true);
 
 		
 	}
@@ -90,6 +91,7 @@ public class MeteorGenerator : MonoBehaviour {
 	public void updateParams(Meteor m) {
 		m.result = result;
 		m.paramA = val1;
+		m.paramB = val2;
 	}
     public void selectionUpdate(Meteor m) {
         selectedMeteor = m;

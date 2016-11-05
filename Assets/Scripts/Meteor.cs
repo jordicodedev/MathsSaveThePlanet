@@ -9,11 +9,11 @@ public class Meteor : MonoBehaviour {
 	public const int MAXDIST = 100;
 
 	//GameObjects
-	public Transform planet;
+	Transform planet;
 
 	//UI
-	public Text distT;
-	public Text stateT;
+	Text distT;
+	Text stateT;
 
 	//Int
 	public int result = 0;
@@ -24,13 +24,14 @@ public class Meteor : MonoBehaviour {
 	float minDist = 0.5f;
 
 	[HideInInspector]
-	public int paramA = 2;
+	public int paramA;
 	[HideInInspector]
-	public int paramB = 0;
+	public int paramB;
 	[HideInInspector]
-	public int paramResult = 0;
+	public int paramResult;
 
 	MeteorGenerator meGenerator;
+	Meteor self;
 
 	//String
 	public string operation = "defineix funcio";
@@ -40,19 +41,33 @@ public class Meteor : MonoBehaviour {
 
 	void OnMouseDown(){
 		Debug.Log ("Holaswqdqw");
+		meGenerator.selectionUpdate (self);
+
 	}
+
+
 
 	// Use this for initialization
 	void Start () {
-		//stateT.text = state.ToString();
-		GetComponentInChildren<TextMesh>().text = paramA+" + "+paramB+" = ?";
+
+
+		planet = GameObject.Find ("PlanetGameObject").transform;
+		distT = GameObject.Find ("ActualDist").GetComponent<Text>();
+		stateT = GameObject.Find ("State").GetComponent<Text>();
 
 
 		meGenerator = GameObject.FindObjectOfType<MeteorGenerator>();
 
-		Meteor self = this.transform.GetComponent<Meteor>();
+		self = this.transform.GetComponent<Meteor>();
 		meGenerator.updateParams(self);
 		Debug.Log("results "+ result);
+
+		GetComponentInChildren<TextMesh>().text = paramA+" + "+paramB+" = ?";
+
+
+
+
+
 		
 	
 	}
@@ -86,7 +101,7 @@ public class Meteor : MonoBehaviour {
 			//Here Call any function U want Like Shoot at here or something
 			//Destroy(gameObject);
 			stateT.text = "Destroyed";
-			gameObject.SetActive(false);
+			Destroy (gameObject);
 		}
 
 
