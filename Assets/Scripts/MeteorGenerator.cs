@@ -1,9 +1,10 @@
 ﻿using UnityEngine;
 using System.Collections;
+
 public class MeteorGenerator : MonoBehaviour {
 	float timerMeteor = 5.0f;
 	public GameObject meteor;
-	Meteor meteorObject;
+	Meteor selectedMeteor;
 	int val1;
 	int val2;
 	int result;
@@ -30,8 +31,7 @@ public class MeteorGenerator : MonoBehaviour {
 		m.transform.position = new Vector3(0,0,0);
 		getOperation(1);
 
-		//op = METEMATICA.GEToperacio(lvl);
-		//m.GetComponent<Meteor>().reciveOperation(op);
+		
 	}
 	void getOperation(int level)
 	{
@@ -91,4 +91,7 @@ public class MeteorGenerator : MonoBehaviour {
 		m.result = result;
 		m.paramA = val1;
 	}
+    public void selectionUpdate(Meteor m) {
+        selectedMeteor = m;
+    }
 }
