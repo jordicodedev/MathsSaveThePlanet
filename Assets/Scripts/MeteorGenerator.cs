@@ -21,11 +21,16 @@ public class MeteorGenerator : MonoBehaviour {
 
     public int lvl;
 
+	public AudioClip boto;
 	public AudioClip over;
 	public AudioClip explosio;
 	public AudioSource altaveu;
+
+	bool lost;
+
 	// Use this for initialization
 	void Start () {
+		lost = false;
 		CreateMeteors ();
 		timerT = GameObject.Find ("Timer").GetComponent<Text>();
         planeta = GameObject.FindObjectOfType<Planet>();
@@ -164,7 +169,8 @@ public class MeteorGenerator : MonoBehaviour {
 
     public void gameOver(){
 		altaveu.clip = over;
-		altaveu.Play ();
+		if (!lost) altaveu.Play ();
+		lost = true;
         countDown = 0;
         timerT.text = "" + finnishingTime.ToString("F0") + " seconds";
         keyBoardObject.SetActive(false);
@@ -172,6 +178,7 @@ public class MeteorGenerator : MonoBehaviour {
     }
 
     public void reset(){
+		lost = false;
         finnishingTime = 0f;
         Meteor[] meteorits = GameObject.FindObjectsOfType<Meteor>();
         foreach (Meteor meteorit in meteorits)
@@ -181,6 +188,9 @@ public class MeteorGenerator : MonoBehaviour {
         keyBoardObject.SetActive(true);
         gameOverObject.SetActive(false);
         countDown = 30;
+
+		altaveu.clip = boto;
+		altaveu.Play ();
     }
 
 }

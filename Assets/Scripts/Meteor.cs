@@ -75,7 +75,7 @@ public class Meteor : MonoBehaviour {
 		//textFunction.text = GetComponentInChildren<TextMesh>().text = paramA+" + "+paramB+" = ?";
 
 		textFunction = GetComponentInChildren<TextMesh> ();
-		textFunction.text = paramA+" + "+paramB+" = "+result;
+		textFunction.text = paramA+" + "+paramB;
 		//textFunction.text = GetComponentInChildren<TextMesh>().text = paramA+" + "+paramB+" = ?";
 
 
