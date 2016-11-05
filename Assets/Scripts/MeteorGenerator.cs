@@ -10,6 +10,8 @@ public class MeteorGenerator : MonoBehaviour {
 	int val2;
 	int result;
     public float radius = 15f;
+
+    public int lvl;
 	// Use this for initialization
 	void Start () {
 		CreateMeteors ();
@@ -51,7 +53,7 @@ public class MeteorGenerator : MonoBehaviour {
         float y = Mathf.Sin(angle) * radius;
 
         m.transform.position = new Vector3(x,y,0);
-		getOperation(1);
+		getOperation(lvl);
 		m.SetActive (true);
 
 		
