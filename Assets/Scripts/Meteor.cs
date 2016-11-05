@@ -23,9 +23,14 @@ public class Meteor : MonoBehaviour {
 	//int maxDist = 100;
 	float minDist = 0.5f;
 
-	int paramA = 2;
-	int paramB = 0;
-	int paramResult = 0;
+	[HideInInspector]
+	public int paramA = 2;
+	[HideInInspector]
+	public int paramB = 0;
+	[HideInInspector]
+	public int paramResult = 0;
+
+	MeteorGenerator meGenerator;
 
 	//String
 	public string operation = "defineix funcio";
@@ -42,6 +47,12 @@ public class Meteor : MonoBehaviour {
 		//stateT.text = state.ToString();
 		GetComponentInChildren<TextMesh>().text = paramA+" + "+paramB+" = ?";
 
+
+		meGenerator = GameObject.FindObjectOfType<MeteorGenerator>();
+
+		Meteor self = this.transform.GetComponent<Meteor>();
+		meGenerator.updateParams(self);
+		Debug.Log("results "+ result);
 		
 	
 	}
