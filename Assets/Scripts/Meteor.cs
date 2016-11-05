@@ -32,6 +32,7 @@ public class Meteor : MonoBehaviour {
 
 	MeteorGenerator meGenerator;
 	Meteor self;
+	TextMesh textFunction;
 
 	//String
 	public string operation = "defineix funcio";
@@ -62,8 +63,15 @@ public class Meteor : MonoBehaviour {
 		meGenerator.updateParams(self);
 		Debug.Log("results "+ result);
 
-		GetComponentInChildren<TextMesh>().text = paramA+" + "+paramB+" = ?";
+		//textFunction.text = GetComponentInChildren<TextMesh>().text = paramA+" + "+paramB+" = ?";
 
+		textFunction = GetComponentInChildren<TextMesh> ();
+		textFunction.text = paramA+" + "+paramB+" = ?";
+		//textFunction.text = GetComponentInChildren<TextMesh>().text = paramA+" + "+paramB+" = ?";
+
+
+
+		//textFunction.transform.rotation = new Quaternion (this.transform.rotation.x * -1, this.transform.rotation.y * -1, this.transform.rotation.z * -1);
 
 
 
@@ -75,6 +83,8 @@ public class Meteor : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 		transform.LookAt(planet);
+
+		textFunction.transform.rotation = Quaternion.identity;
 
 
 
