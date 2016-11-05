@@ -3,6 +3,7 @@ using System.Collections;
 
 public class MeteorGenerator : MonoBehaviour {
 	float timerMeteor = 5.0f;
+    float countDown = 30.0f;
 	public GameObject meteor;
 	Meteor selectedMeteor;
 	int val1;
@@ -23,8 +24,23 @@ public class MeteorGenerator : MonoBehaviour {
 			CreateMeteors();
 			timerMeteor = 10.0f;
 		}
-	}    
-	void CreateMeteors()
+
+        countDown -= Time.deltaTime;
+
+
+	}
+
+    private GUIStyle textSize = new GUIStyle();
+
+    void OnGUI()
+    {
+
+        textSize.fontSize = 20;
+        
+        GUI.Label(new Rect(Screen.width/2-10, Screen.height/2 - (Screen.height/2)/2, 100, 20), countDown.ToString("F0"), textSize);
+    }
+
+    void CreateMeteors()
 	{
 		GameObject m;
 		m = Instantiate(meteor);
