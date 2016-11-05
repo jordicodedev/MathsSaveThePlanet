@@ -5,6 +5,7 @@ using UnityEngine.UI;
 public class MeteorGenerator : MonoBehaviour {
 	float timerMeteor = 1.0f;
     float countDown = 30.0f;
+    float finnishingTime = 0f;
 	public GameObject meteor;
 	public Meteor selectedMeteor;
 	int val1;
@@ -12,6 +13,9 @@ public class MeteorGenerator : MonoBehaviour {
 	int result;
     public float radius = 15f;
 	Text timerT;
+
+    public GameObject gameOverObject;
+    public GameObject keyBoardObject;
 
     public int lvl;
 	// Use this for initialization
@@ -27,24 +31,24 @@ public class MeteorGenerator : MonoBehaviour {
 		timerT.text = countDown.ToString ("F0");
 		if (timerMeteor < 0)
 		{
-			CreateMeteors();
+            if (countDown > 0){
+                CreateMeteors();
+            }			
 			timerMeteor = 10.0f;
 		}
 
-        countDown -= Time.deltaTime;
-
+       
+        if (countDown <= 0){
+            Debug.Log("temps!");
+            gameOver();
+            countDown = 0;
+        }
+        else {
+            countDown -= Time.deltaTime;
+            finnishingTime += Time.deltaTime;
+        }
 
 	}
-
-    //private GUIStyle textSize = new GUIStyle();
-
-    /*void OnGUI()
-    {
-
-        textSize.fontSize = 20;
-        
-        GUI.Label(new Rect(Screen.width/2-10, Screen.height/2 - (Screen.height/2)/2, 100, 20), countDown.ToString("F0"), textSize);
-    }*/
 
     void CreateMeteors()
 	{
@@ -116,6 +120,7 @@ public class MeteorGenerator : MonoBehaviour {
 	void divide()
 	{
 	}
+
 	public void updateParams(Meteor m) {
 		m.result = result;
 		m.paramA = val1;
@@ -128,13 +133,29 @@ public class MeteorGenerator : MonoBehaviour {
 	public void comprovacioResultat(int respostaJugador){
 		if (respostaJugador == selectedMeteor.result) {
 			Destroy (selectedMeteor.gameObject);
-			//Afegir temps
+            countDown += 5;
 		}else{
-			//incrementar velocitat
-			selectedMeteor.moveSpeed += 0.5f; 
+			selectedMeteor.moveSpeed += 0.3f; 
 		}
 	}
 
+    public void gameOver(){
+        countDown = 0;
+        timerT.text = "Achived: " + finnishingTime.ToString("F0") + " seconds";
+        keyBoardObject.SetActive(false);
+        gameOverObject.SetActive(true);
+    }
 
-		
+    public void reset(){
+        finnishingTime = 0f;
+        Meteor[] meteorits = GameObject.FindObjectsOfType<Meteor>();
+        foreach (Meteor meteorit in meteorits)
+        {
+            Destroy(meteorit.gameObject);
+        }
+        keyBoardObject.SetActive(true);
+        gameOverObject.SetActive(false);
+        countDown = 30;
+    }
+
 }

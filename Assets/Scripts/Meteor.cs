@@ -82,10 +82,6 @@ public class Meteor : MonoBehaviour {
 
 		//textFunction.transform.rotation = new Quaternion (this.transform.rotation.x * -1, this.transform.rotation.y * -1, this.transform.rotation.z * -1);
 
-
-
-
-		
 	
 	}
 	
@@ -95,15 +91,11 @@ public class Meteor : MonoBehaviour {
 
 		textFunction.transform.rotation = Quaternion.identity;
 
-
-
 		if(Vector3.Distance(transform.position,planet.position) >= minDist){
 
 			transform.position += transform.forward*moveSpeed*Time.deltaTime;
 			dist = Vector3.Distance(transform.position,planet.position);
 			distT.text = dist.ToString();
-
-
 
 			if(Vector3.Distance(transform.position,planet.position) <= MAXDIST)
 			{
@@ -119,13 +111,11 @@ public class Meteor : MonoBehaviour {
 		if(Vector3.Distance(transform.position,planet.position) <= minDist)
 		{
 			//Here Call any function U want Like Shoot at here or something
-			//Destroy(gameObject);
 			stateT.text = "Destroyed";
+            meGenerator.gameOver();
 			Destroy (gameObject);
 
 		}
-
-
 	
 	}
 
