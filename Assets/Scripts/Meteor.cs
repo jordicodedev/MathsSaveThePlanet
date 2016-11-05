@@ -33,6 +33,10 @@ public class Meteor : MonoBehaviour {
 
 
 
+	void OnMouseDown(){
+		Debug.Log ("Holaswqdqw");
+	}
+
 	// Use this for initialization
 	void Start () {
 		//stateT.text = state.ToString();
@@ -72,7 +76,10 @@ public class Meteor : MonoBehaviour {
 			//Destroy(gameObject);
 			stateT.text = "Destroyed";
 			gameObject.SetActive(false);
-		} 
+		}
+
+
 	
 	}
+
 }
