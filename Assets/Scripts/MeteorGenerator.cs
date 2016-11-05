@@ -8,7 +8,7 @@ public class MeteorGenerator : MonoBehaviour {
 	int val1;
 	int val2;
 	int result;
-
+    public float radius = 15f;
 	// Use this for initialization
 	void Start () {
 		CreateMeteors ();
@@ -28,7 +28,13 @@ public class MeteorGenerator : MonoBehaviour {
 	{
 		GameObject m;
 		m = Instantiate(meteor);
-		m.transform.position = new Vector3(0,0,0);
+
+        var angle = Random.Range(0f,1f) * Mathf.PI * 2;
+
+        float x = Mathf.Cos(angle) * radius;
+        float y = Mathf.Sin(angle) * radius;
+
+        m.transform.position = new Vector3(x,y,0);
 		getOperation(1);
 		m.SetActive (true);
 
