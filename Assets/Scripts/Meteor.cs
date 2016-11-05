@@ -19,7 +19,7 @@ public class Meteor : MonoBehaviour {
 	public int result = 0;
 	public float dist = MAXDIST;
 	public int state;
-	float moveSpeed = 0.2f;
+	public float moveSpeed = 0.2f;
 	//int maxDist = 100;
 	float minDist = 1.1f;
 
@@ -59,7 +59,7 @@ public class Meteor : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
 
-
+		moveSpeed = Random.Range(0.15f,0.4f);
 		planet = GameObject.Find ("PlanetGameObject").transform;
 		distT = GameObject.Find ("ActualDist").GetComponent<Text>();
 		stateT = GameObject.Find ("State").GetComponent<Text>();

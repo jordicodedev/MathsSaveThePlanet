@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using UnityEngine.UI;
 
 public class MeteorGenerator : MonoBehaviour {
 	float timerMeteor = 1.0f;
@@ -10,17 +11,20 @@ public class MeteorGenerator : MonoBehaviour {
 	int val2;
 	int result;
     public float radius = 15f;
+	Text timerT;
 
     public int lvl;
 	// Use this for initialization
 	void Start () {
 		CreateMeteors ();
+		timerT = GameObject.Find ("Timer").GetComponent<Text>();
+
 	}
 
 	// Update is called once per frame
 	void Update () {
 		timerMeteor -= Time.deltaTime;
-
+		timerT.text = countDown.ToString ("F0");
 		if (timerMeteor < 0)
 		{
 			CreateMeteors();
@@ -32,15 +36,15 @@ public class MeteorGenerator : MonoBehaviour {
 
 	}
 
-    private GUIStyle textSize = new GUIStyle();
+    //private GUIStyle textSize = new GUIStyle();
 
-    void OnGUI()
+    /*void OnGUI()
     {
 
         textSize.fontSize = 20;
         
         GUI.Label(new Rect(Screen.width/2-10, Screen.height/2 - (Screen.height/2)/2, 100, 20), countDown.ToString("F0"), textSize);
-    }
+    }*/
 
     void CreateMeteors()
 	{
@@ -127,7 +131,10 @@ public class MeteorGenerator : MonoBehaviour {
 			//Afegir temps
 		}else{
 			//incrementar velocitat
+			selectedMeteor.moveSpeed += 0.5f; 
 		}
 	}
+
+
 		
 }
