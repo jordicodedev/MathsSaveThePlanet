@@ -17,12 +17,14 @@ public class MeteorGenerator : MonoBehaviour {
     public GameObject gameOverObject;
     public GameObject keyBoardObject;
 
+    Planet planeta;
+
     public int lvl;
 	// Use this for initialization
 	void Start () {
 		CreateMeteors ();
 		timerT = GameObject.Find ("Timer").GetComponent<Text>();
-
+        planeta = GameObject.FindObjectOfType<Planet>();
 	}
 
 	// Update is called once per frame
@@ -47,8 +49,23 @@ public class MeteorGenerator : MonoBehaviour {
             countDown -= Time.deltaTime;
             finnishingTime += Time.deltaTime;
         }
+        if (finnishingTime < 10) {
+            planeta.s = 0;
+        } else if (finnishingTime < 20)
+        {
+            planeta.s = 1;
+        }
+        else if (finnishingTime < 30)
+        {
+            planeta.s = 2;
+        }
+        else 
+        {
+            planeta.s = 3;
+        }
 
-	}
+
+    }
 
     void CreateMeteors()
 	{
@@ -141,7 +158,7 @@ public class MeteorGenerator : MonoBehaviour {
 
     public void gameOver(){
         countDown = 0;
-        timerT.text = "Achived: " + finnishingTime.ToString("F0") + " seconds";
+        timerT.text = "" + finnishingTime.ToString("F0") + " seconds";
         keyBoardObject.SetActive(false);
         gameOverObject.SetActive(true);
     }
